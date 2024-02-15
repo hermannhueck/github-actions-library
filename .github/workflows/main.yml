@@ -130,3 +130,14 @@ jobs:
       - name: Install Package
         run: |
           pip install my_math*.whl
+
+      - name: Checkout the tests
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: src/tests
+
+      - name: Run the tests again installed package
+        working-directory: src
+        run: |
+          pip install pytest pytest-benchmark
+          pytest tests/
